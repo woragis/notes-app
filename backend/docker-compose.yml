@@ -1,0 +1,72 @@
+services:
+  notes-database:
+    image: postgres:16.6
+    container_name: notes-database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: notes
+    ports:
+      - "5432:5432"
+    volumes:
+      - notes_database_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "notes"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+    networks:
+      - notes-network
+
+  notes-redis:
+    image: redis:7.2.5
+    container_name: notes-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+      timeout: 5s
+    networks:
+      - notes-network
+
+  # nginx:
+  #   image: nginx:1.27.3
+  #   container_name: notes-nginx-backend
+  #   depends_on:
+  #     - notes-backend
+  #   ports:
+  #     - "8080:80"
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/backend/nginx.conf:ro
+  #   networks:
+  #     - notes-network
+
+  notes-backend:
+    container_name: notes-backend
+    restart: on-failure:3
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - notes-database
+      - notes-redis
+    environment:
+      - DATABASE_URL=postgres://postgres:password@notes-database:5432/notes?sslmode=disable
+      - REDIS_URL=redis://notes-redis:6379
+    networks:
+      - notes-network
+
+networks:
+  notes-network:
+    name: notes-network
+    driver: bridge
+
+volumes:
+  notes_database_data:
+    name: notes-database

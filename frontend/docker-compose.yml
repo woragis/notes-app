@@ -1,0 +1,29 @@
+services:
+  notes-frontend:
+    container_name: notes-frontend
+    restart: on-failure:3
+    build:
+      context: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+    networks:
+      - notes-network
+
+  nginx:
+    image: nginx:1.27.3
+    container_name: notes-nginx-frontend
+    depends_on:
+      - notes-frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/frontend/nginx.conf:ro
+    networks:
+      - notes-network
+
+networks:
+  notes-network:
+    name: notes-network
+    driver: bridge
