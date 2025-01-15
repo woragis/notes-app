@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SendRespnose(
+func SendResponse(
 	c *gin.Context,
 	status int,
 	message string,
