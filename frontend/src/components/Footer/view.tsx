@@ -4,9 +4,7 @@ import {
   FooterBrand,
   FooterContainer,
   FooterLink,
-  FooterListItem,
   FooterMedia,
-  FooterMenu,
   StyledFooter,
 } from "./styles";
 

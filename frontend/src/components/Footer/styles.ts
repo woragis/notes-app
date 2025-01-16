@@ -31,19 +31,6 @@ export const FooterContainer = styled.section`
   padding: 2em;
 `;
 
-export const FooterMenu = styled.ul`
-  list-style-type: none;
-  a {
-    transition: 300ms;
-    font-weight: 300;
-    color: var(--weak-color);
-    &:hover {
-      color: var(--color);
-      text-decoration: none;
-    }
-  }
-`;
-
 export const FooterMedia = styled.ul`
   margin: 1.5em 0;
   display: flex;
@@ -79,12 +66,6 @@ export const FooterBrand = styled(Link)`
   font-weight: 600;
   margin-bottom: 1em;
   margin: 0;
-`;
-
-export const FooterListItem = styled.li`
-  display: inline-block;
-  margin: 1rem;
-  text-align: center;
 `;
 
 export const FooterLink = styled(Link)`
