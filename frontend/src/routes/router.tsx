@@ -2,11 +2,11 @@ import {
   createRootRoute,
   createRoute,
   createRouter,
-  Link,
   Outlet,
 } from "@tanstack/react-router";
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
+import Navbar from "../components/Navbar";
 
 // const router = createRouter({});
 const rootRoute = createRootRoute({
@@ -16,11 +16,7 @@ const rootRoute = createRootRoute({
   component: () => {
     return (
       <>
-        <nav>
-          <Link to={"/"}>Home</Link>
-          <Link to={"/profile"}>Profile</Link>
-        </nav>
-        <hr />
+        <Navbar />
         <main>
           <Outlet />
         </main>
