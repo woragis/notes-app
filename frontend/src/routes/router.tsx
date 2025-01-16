@@ -7,6 +7,7 @@ import {
 import Profile from "../pages/Profile";
 import Home from "../pages/Home";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // const router = createRouter({});
 const rootRoute = createRootRoute({
@@ -20,7 +21,7 @@ const rootRoute = createRootRoute({
         <main>
           <Outlet />
         </main>
-        <footer>footer</footer>
+        <Footer />
       </>
     );
   },
