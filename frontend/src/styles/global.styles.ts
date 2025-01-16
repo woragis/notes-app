@@ -1,22 +1,57 @@
 import { css } from "@emotion/react";
 
-export const globalStyles = css`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+export const global = () => {
+  return css`
+    :root {
+      font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      font-weight: 400;
 
-    // links default styling
-    text-decoration: none;
+      color-scheme: light dark;
+      color: rgba(255, 255, 255, 0.87);
+      background-color: #242424;
 
-    // lists default styling
-    list-style-type: none;
-  }
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    button {
+      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 0.6em 1.2em;
+      font-size: 1em;
+      font-weight: 500;
+      font-family: inherit;
+      background-color: #1a1a1a;
+      cursor: pointer;
+      transition: border-color 0.25s;
+    }
+    button:hover {
+      border-color: #646cff;
+    }
+    button:focus,
+    button:focus-visible {
+      outline: 4px auto -webkit-focus-ring-color;
+    }
 
-  main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-`;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+
+      // links default styling
+      text-decoration: none;
+
+      // lists default styling
+      list-style-type: none;
+    }
+
+    main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  `;
+};
