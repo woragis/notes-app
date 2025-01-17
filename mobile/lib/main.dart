@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'dart:math' as math show Random;
 
 import 'package:notes_mobile/screens/home_page.dart';
 

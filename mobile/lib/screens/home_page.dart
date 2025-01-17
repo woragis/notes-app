@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'dart:math' as math show Random;
 
@@ -81,7 +80,7 @@ class PersonsBloc extends Bloc<LoadAction, FetchResult?> {
       if (_cache.containsKey(url)) {
         final cachedPersons = _cache[url];
         final result = FetchResult(
-          persons: cachedPersons,
+          persons: cachedPersons as Iterable<Person>,
           isRetrievedFromCache: true,
         );
         emit(result);
@@ -103,15 +102,15 @@ extension Subscript<T> on Iterable<T> {
 }
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    late final Bloc myBloc;
+    late final Bloc _;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Home Pagec"),
+        title: const Text('Home Pagec'),
       ),
       body: Column(
         children: [
@@ -126,7 +125,7 @@ class HomePage extends StatelessWidget {
                       );
                 },
                 child: const Text(
-                  "Load json #1",
+                  'Load json #1',
                 ),
               ),
               TextButton(
@@ -138,7 +137,7 @@ class HomePage extends StatelessWidget {
                       );
                 },
                 child: const Text(
-                  "Load json #2",
+                  'Load json #2',
                 ),
               ),
             ],
