@@ -49,10 +49,12 @@ export const global = () => {
 
     main {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       flex-direction: column;
       min-height: 100vh;
+      padding-top: 100px;
+      width: 100%;
     }
   `;
 };
