@@ -3,7 +3,6 @@ package database
 import (
 	"context"
 	"log"
-	"os"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -11,7 +10,8 @@ import (
 var DB *pgxpool.Pool
 
 func Connect() {
-	dsn := os.Getenv("DATABASE_URL")
+	dsn  := "postgres://postgres:password@localhost:5432/notes?sslmode=disable"
+	// dsn := os.Getenv("DATABASE_URL")
 	if dsn == "" {
 		log.Fatal("DATABASE_URL environment variable is not set")
 	}
@@ -21,7 +21,7 @@ func Connect() {
 	if err != nil {
 		log.Fatalf("Unable to connect to database: %v\n", err)
 	}
-	log.Panicln("Connected to PostgreSOL database!")
+	log.Println("Connected to PostgreSOL database!")
 }
 
 func InitializeTables() {

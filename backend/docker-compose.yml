@@ -45,22 +45,22 @@ services:
   #   networks:
   #     - notes-network
 
-  notes-backend:
-    container_name: notes-backend
-    restart: on-failure:3
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - notes-database
-      - notes-redis
-    environment:
-      - DATABASE_URL=postgres://postgres:password@notes-database:5432/notes?sslmode=disable
-      - REDIS_URL=redis://notes-redis:6379
-    networks:
-      - notes-network
+  # notes-backend:
+  #   container_name: notes-backend
+  #   restart: on-failure:3
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - notes-database
+  #     - notes-redis
+  #   environment:
+  #     - DATABASE_URL=postgres://postgres:password@notes-database:5432/notes?sslmode=disable
+  #     - REDIS_URL=redis://notes-redis:6379
+  #   networks:
+  #     - notes-network
 
 networks:
   notes-network:
