@@ -3,7 +3,7 @@ import * as thunk from "./thunks";
 import { User } from "../../types/user.types";
 
 interface AuthState {
-  user: User;
+  user?: User;
   authenticated: boolean;
 }
 const authSlice = createSlice({

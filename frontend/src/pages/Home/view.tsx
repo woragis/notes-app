@@ -15,6 +15,7 @@ export const HomeView = ({
           id: note.id,
           title: note.title,
           content: note.content,
+          author_id: note.author_id,
         }}
       />
     );

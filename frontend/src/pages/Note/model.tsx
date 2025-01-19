@@ -4,7 +4,7 @@ import { getNote } from "../../features/notes/slice";
 
 export const useNoteModel = () => {
   const { noteId } = useParams({
-    from: "/$noteId",
+    from: "/notes/$noteId",
   });
   const dispatch = useAppDispatch();
   dispatch(getNote(Number(noteId)));

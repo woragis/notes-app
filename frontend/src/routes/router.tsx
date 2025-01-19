@@ -66,7 +66,7 @@ const profileRoute = createRoute({
 
 const noteRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "$noteId",
+  path: "notes/$noteId",
   loader: ({ params }) => {
     console.log(params.noteId);
   },

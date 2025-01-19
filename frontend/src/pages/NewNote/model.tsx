@@ -9,7 +9,7 @@ export const useNewNoteModel = () => {
   const dispatch = useAppDispatch();
 
   const [note, setNote] = useState<NoteInterface>({} as NoteInterface);
-  const userId = useAppSelector((state) => state.auth.user.id);
+  const userId = useAppSelector((state) => state.auth.user?.id || 1);
 
   const createNewNote = async (event: FormEvent) => {
     event.preventDefault();

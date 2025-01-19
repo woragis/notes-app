@@ -15,7 +15,7 @@ export const NoteView = ({
       <header>
         <button onClick={deleteNote}>Delete note</button>
       </header>
-      <ContentWrapper to={`note/${note.id}`}>
+      <ContentWrapper to={`notes/${note.id}`}>
         <NoteTitleContainer>{note.title}</NoteTitleContainer>
         <NoteContentContainer>{note.content}</NoteContentContainer>
       </ContentWrapper>
