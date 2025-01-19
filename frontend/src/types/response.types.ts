@@ -1,4 +1,5 @@
 import { NoteInterface } from "./note.types";
+import { User } from "./user.types";
 
 interface DefaultResponse {
   message: string;
@@ -17,4 +18,11 @@ export interface NoteResponse extends DefaultResponse {
 
 export interface DeleteResponse extends DefaultResponse {
   data: boolean;
+}
+
+export interface AuthResponse extends DefaultResponse {
+  data: {
+    token: string;
+    user: User;
+  };
 }
