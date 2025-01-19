@@ -12,10 +12,10 @@ const notesSlice = createSlice({
     getNote: (state, action: PayloadAction<NoteInterface["id"]>) => {
       state.note = state.notes.find((note) => note.id === action.payload);
     },
-    createNotes: (state, action: PayloadAction<NoteInterface>) => {
+    createNote: (state, action: PayloadAction<NoteInterface>) => {
       state.notes.push(action.payload);
     },
-    updateNotes: (state, action: PayloadAction<NoteInterface>) => {
+    updateNote: (state, action: PayloadAction<NoteInterface>) => {
       state.notes.push(action.payload);
     },
     deleteNote: (state, action: PayloadAction<NoteInterface["id"]>) => {
@@ -24,6 +24,6 @@ const notesSlice = createSlice({
   },
 });
 
-export const { setNotes, getNote, createNotes, updateNotes, deleteNote } =
+export const { setNotes, getNote, createNote, updateNote, deleteNote } =
   notesSlice.actions;
 export default notesSlice.reducer;
