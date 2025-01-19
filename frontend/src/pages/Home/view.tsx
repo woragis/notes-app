@@ -1,4 +1,3 @@
-import { HiH1 } from "react-icons/hi2";
 import Note from "../../components/Note";
 import { useHomeModel } from "./model";
 import { HomeDivider, HomeTitle, NotesContainer } from "./styles";

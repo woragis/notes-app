@@ -9,6 +9,7 @@ import Home from "../pages/Home";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NewNote from "../pages/NewNote";
+import Authenticate from "../pages/Authenticate";
 
 // const router = createRouter({});
 const rootRoute = createRootRoute({
@@ -32,6 +33,12 @@ const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
   component: Home,
+});
+
+const authenticationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/auth",
+  component: Authenticate,
 });
 
 const newNoteRoute = createRoute({
@@ -65,7 +72,13 @@ const noteRoute = createRoute({
   component: Home,
 });
 
-const routes = [indexRoute, profileRoute, noteRoute, newNoteRoute];
+const routes = [
+  indexRoute,
+  profileRoute,
+  noteRoute,
+  newNoteRoute,
+  authenticationRoute,
+];
 export const routeTree = rootRoute.addChildren(routes);
 
 declare module "@tanstack/react-router" {
