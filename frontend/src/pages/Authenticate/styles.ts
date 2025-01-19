@@ -6,6 +6,7 @@ export const AuthSection = styled.section`
   position: absolute;
   top: 5rem;
 `;
+
 export const FormsContainer = styled.article`
   font-family: "Poppins", sans-serif;
   width: 380px;

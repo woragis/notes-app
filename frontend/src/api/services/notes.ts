@@ -12,19 +12,19 @@ export const fetchNotes = async () => {
   return data;
 };
 
-export const fetchNote = async (noteId: number) => {
+export const getNoteRemote = async (noteId: number) => {
   const response = await axiosInstance.get<NoteResponse>(`notes/${noteId}`);
   const data = response.data;
   return data;
 };
 
-export const postNote = async (note: NoteInterface) => {
+export const postNoteRemote = async (note: NoteInterface) => {
   const response = await axiosInstance.post<NoteResponse>("notes/", note);
   const data = response.data;
   return data;
 };
 
-export const putNote = async (note: NoteInterface) => {
+export const putNoteRemote = async (note: NoteInterface) => {
   const response = await axiosInstance.put<NoteResponse>(
     `notes/${note["id"]}`,
     note
@@ -33,7 +33,7 @@ export const putNote = async (note: NoteInterface) => {
   return data;
 };
 
-export const deleteNote = async (noteId: number) => {
+export const deleteNoteRemote = async (noteId: number) => {
   const response = await axiosInstance.delete<DeleteResponse>(
     `notes/${noteId}`
   );

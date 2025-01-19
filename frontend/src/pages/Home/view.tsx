@@ -2,20 +2,20 @@ import Note from "../../components/Note";
 import { useHomeModel } from "./model";
 import { HomeDivider, HomeTitle, NotesContainer } from "./styles";
 
-export const HomeView = ({}: ReturnType<typeof useHomeModel>) => {
-  const notesComponent = [
-    0, 1, 2, 3, 4, 5, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-  ].map((_, index) => {
+export const HomeView = ({ notes }: ReturnType<typeof useHomeModel>) => {
+  const notesComponent = notes.map((note, index) => {
     return (
       <Note
+        key={`note_n_${index}`}
         note={{
-          id: index + 1,
-          title: "Oi jurenge",
-          content: `${"Como que caga".repeat(index)}`,
+          id: note.id,
+          title: note.title,
+          content: note.content,
         }}
       />
     );
   });
+
   return (
     <div>
       <HomeTitle>Notas</HomeTitle>

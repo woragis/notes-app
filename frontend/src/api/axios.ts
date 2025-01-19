@@ -4,7 +4,7 @@ const baseURL = "http://localhost:8080/";
 const timeout = 5000;
 const token = "";
 const headers = {
-  "application/type": "application/json",
+  // "application/type": "application/json",
   Authorization: `Bearer ${token}`,
 };
 

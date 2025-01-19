@@ -12,7 +12,11 @@ export const FooterView = ({
   socialMediaLinks,
 }: ReturnType<typeof useFooterModel>) => {
   const socialMediaComponent = socialMediaLinks.map((link) => {
-    return <FooterLink to={link.path}>{link.icon}</FooterLink>;
+    return (
+      <FooterLink key={`footer_item_${link.key}`} to={link.path}>
+        {link.icon}
+      </FooterLink>
+    );
   });
 
   return (

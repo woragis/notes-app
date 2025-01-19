@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Link } from "@tanstack/react-router";
 
-export const StyledNote = styled(Link)`
+export const StyledNote = styled.li`
   color: #fff;
   display: inline-block;
   padding: 12px 20px 26px;
@@ -13,6 +13,8 @@ export const StyledNote = styled(Link)`
   overflow-y: hidden;
   margin-bottom: 20px;
 `;
+
+export const ContentWrapper = styled(Link)``;
 
 export const NoteTitleContainer = styled.div`
   display: flex;

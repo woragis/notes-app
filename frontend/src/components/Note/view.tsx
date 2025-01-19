@@ -1,11 +1,24 @@
 import { useNoteModel } from "./model";
-import { NoteContentContainer, NoteTitleContainer, StyledNote } from "./styles";
+import {
+  ContentWrapper,
+  NoteContentContainer,
+  NoteTitleContainer,
+  StyledNote,
+} from "./styles";
 
-export const NoteView = ({ note }: ReturnType<typeof useNoteModel>) => {
+export const NoteView = ({
+  note,
+  deleteNote,
+}: ReturnType<typeof useNoteModel>) => {
   return (
-    <StyledNote to={`note/${note.id}`}>
-      <NoteTitleContainer>{note.title}</NoteTitleContainer>
-      <NoteContentContainer>{note.content}</NoteContentContainer>
+    <StyledNote>
+      <header>
+        <button onClick={deleteNote}>Delete note</button>
+      </header>
+      <ContentWrapper to={`note/${note.id}`}>
+        <NoteTitleContainer>{note.title}</NoteTitleContainer>
+        <NoteContentContainer>{note.content}</NoteContentContainer>
+      </ContentWrapper>
     </StyledNote>
   );
 };

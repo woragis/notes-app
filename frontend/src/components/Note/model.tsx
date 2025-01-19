@@ -1,3 +1,7 @@
+import { useNavigate } from "@tanstack/react-router";
+import { deleteNoteRemote } from "../../api/services/notes";
+import { useAppDispatch } from "../../features/hooks";
+import { deleteNote } from "../../features/notes/slice";
 import { NoteInterface } from "../../types/note.types";
 
 export const useNoteModel = (note: NoteInterface) => {
@@ -6,5 +10,18 @@ export const useNoteModel = (note: NoteInterface) => {
   //   title: "Oi jureque",
   //   content: "oi",
   // };
-  return { note };
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const deleteCurrentNote = async () => {
+    const result = await deleteNoteRemote(note.id);
+    if (result.data) {
+      dispatch(deleteNote(note.id));
+      navigate({
+        to: "/",
+      });
+    } else {
+      alert("Note could not be deleted");
+    }
+  };
+  return { note, deleteNote: deleteCurrentNote };
 };

@@ -4,11 +4,13 @@ import { NotesSliceState } from "../../types/redux.types";
 
 const notesSlice = createSlice({
   name: "notes",
-  initialState: {} as NotesSliceState,
+  initialState: { notes: [], note: undefined } as NotesSliceState,
   reducers: {
-    getNotes: () => {},
+    setNotes: (state, action: PayloadAction<NoteInterface[]>) => {
+      state.notes = action.payload;
+    },
     getNote: (state, action: PayloadAction<NoteInterface["id"]>) => {
-      state.notes.find((note) => note.id === action.payload);
+      state.note = state.notes.find((note) => note.id === action.payload);
     },
     createNotes: (state, action: PayloadAction<NoteInterface>) => {
       state.notes.push(action.payload);
@@ -22,6 +24,6 @@ const notesSlice = createSlice({
   },
 });
 
-export const { getNotes, getNote, createNotes, updateNotes, deleteNote } =
+export const { setNotes, getNote, createNotes, updateNotes, deleteNote } =
   notesSlice.actions;
 export default notesSlice.reducer;
