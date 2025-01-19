@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { NoteInterface } from "../../types/note.types";
-import { postNoteRemote } from "../../api/services/notes";
+import { createNoteService } from "../../api/services/notes";
 import { useNavigate } from "@tanstack/react-router";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { createNote } from "../../features/notes/slice";
@@ -11,7 +11,7 @@ export const useNewNoteModel = () => {
   const dispatch = useAppDispatch();
   const createNewNote = async (event: FormEvent) => {
     event.preventDefault();
-    const response = await postNoteRemote(note);
+    const response = await createNoteService(note);
     dispatch(createNote(response.data));
     navigate({
       to: `/${response.data.id}`,

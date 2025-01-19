@@ -3,9 +3,14 @@ import { LoginInterface, RegisterInterface } from "../../types/user.types";
 import { axiosInstance } from "../axios";
 
 export const registerService = async (user: RegisterInterface) => {
-  return await axiosInstance.post<AuthResponse>("/auth/register", user);
+  const response = await axiosInstance.post<AuthResponse>(
+    "auth/register",
+    user
+  );
+  return response.data;
 };
 
 export const loginService = async (user: LoginInterface) => {
-  return await axiosInstance.post<AuthResponse>("/auth/login", user);
+  const response = await axiosInstance.post<AuthResponse>("auth/login", user);
+  return response.data;
 };

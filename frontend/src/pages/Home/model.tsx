@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { fetchNotes } from "../../api/services/notes";
+import { getNotesService } from "../../api/services/notes";
 import { setNotes } from "../../features/notes/slice";
 import { useNavigate } from "@tanstack/react-router";
 
@@ -9,7 +9,7 @@ export const useHomeModel = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     const fetch = async () => {
-      const response = await fetchNotes();
+      const response = await getNotesService();
       // console.log("notes:", response.data);
       dispatch(setNotes(response.data));
     };

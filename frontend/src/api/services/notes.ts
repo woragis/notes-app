@@ -6,37 +6,32 @@ import {
 } from "../../types/response.types";
 import { axiosInstance } from "../axios";
 
-export const fetchNotes = async () => {
+export const getNotesService = async () => {
   const response = await axiosInstance.get<NotesResponse>("notes/");
-  const data = response.data;
-  return data;
+  return response.data;
 };
 
-export const getNoteRemote = async (noteId: number) => {
+export const getNoteByIdService = async (noteId: number) => {
   const response = await axiosInstance.get<NoteResponse>(`notes/${noteId}`);
-  const data = response.data;
-  return data;
+  return response.data;
 };
 
-export const postNoteRemote = async (note: NoteInterface) => {
+export const createNoteService = async (note: NoteInterface) => {
   const response = await axiosInstance.post<NoteResponse>("notes/", note);
-  const data = response.data;
-  return data;
+  return response.data;
 };
 
-export const putNoteRemote = async (note: NoteInterface) => {
+export const updateNoteService = async (note: NoteInterface) => {
   const response = await axiosInstance.put<NoteResponse>(
     `notes/${note["id"]}`,
     note
   );
-  const data = response.data;
-  return data;
+  return response.data;
 };
 
-export const deleteNoteRemote = async (noteId: number) => {
+export const deleteNoteService = async (noteId: number) => {
   const response = await axiosInstance.delete<DeleteResponse>(
     `notes/${noteId}`
   );
-  const data = response.data;
-  return data;
+  return response.data;
 };

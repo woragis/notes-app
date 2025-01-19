@@ -1,7 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { LoginInterface, RegisterInterface } from "../../types/user.types";
+import { useAppDispatch } from "../../features/hooks";
+import { loginThunk, registerThunk } from "../../features/auth/thunks";
 
 export const useAuthenticateModel = () => {
+  const dispatch = useAppDispatch();
+
   const [newUser, setNewUser] = useState<RegisterInterface>(
     {} as RegisterInterface
   );
@@ -12,6 +16,7 @@ export const useAuthenticateModel = () => {
   };
   const registerUser = (event: FormEvent) => {
     event.preventDefault();
+    dispatch(registerThunk(newUser));
   };
 
   const [user, setUser] = useState<LoginInterface>({} as LoginInterface);
@@ -22,6 +27,7 @@ export const useAuthenticateModel = () => {
   };
   const loginUser = (event: FormEvent) => {
     event.preventDefault();
+    dispatch(loginThunk(user));
   };
 
   return {
