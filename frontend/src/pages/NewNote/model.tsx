@@ -1,9 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { NoteInterface } from "../../types/note.types";
-import { createNoteService } from "../../api/services/notes";
 import { useNavigate } from "@tanstack/react-router";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { createNote } from "../../features/notes/slice";
+import { createNoteThunk } from "../../features/notes/thunks";
 
 export const useNewNoteModel = () => {
   const [note, setNote] = useState<NoteInterface>({} as NoteInterface);
@@ -11,10 +10,10 @@ export const useNewNoteModel = () => {
   const dispatch = useAppDispatch();
   const createNewNote = async (event: FormEvent) => {
     event.preventDefault();
-    const response = await createNoteService(note);
-    dispatch(createNote(response.data));
+    dispatch(createNoteThunk(note));
+    const newNote = useAppSelector((state) => state.notes.note);
     navigate({
-      to: `/${response.data.id}`,
+      to: `/${newNote?.id}`,
     });
   };
 

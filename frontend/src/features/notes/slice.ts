@@ -27,6 +27,7 @@ const notesSlice = createSlice({
       // create note and add to redux storage
       .addCase(thunk.createNoteThunk.fulfilled, (state, action) => {
         state.notes.push(action.payload.data);
+        state.note = action.payload.data;
       })
 
       // update note and update on redux storage
