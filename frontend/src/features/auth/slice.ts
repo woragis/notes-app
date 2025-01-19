@@ -1,15 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import * as thunk from "./thunks";
+import { User } from "../../types/user.types";
 
-interface UserInterface {
-  name: string;
-  email: string;
-  password: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 interface AuthState {
-  user: UserInterface;
+  user: User;
   authenticated: boolean;
 }
 const authSlice = createSlice({
@@ -24,11 +18,11 @@ const authSlice = createSlice({
     builder
       .addCase(thunk.registerThunk.fulfilled, (state, action) => {
         state.authenticated = true;
-        state.user = action.payload.data.data.user;
+        state.user = action.payload.data.user;
       })
       .addCase(thunk.loginThunk.fulfilled, (state, action) => {
         state.authenticated = true;
-        state.user = action.payload.data.data.user;
+        state.user = action.payload.data.user;
       });
   },
 });

@@ -1,13 +1,14 @@
-export interface LoginInterface {
+export interface LoginUserInterface {
   email: string;
   password: string;
 }
 
-export interface RegisterInterface extends LoginInterface {
+export interface RegisterUserRequest extends LoginUserInterface {
   name: string;
 }
 
-export interface User extends RegisterInterface {
+export interface User extends RegisterUserRequest {
+  id: number;
   createdAt: Date;
   updatedAt: Date;
 }

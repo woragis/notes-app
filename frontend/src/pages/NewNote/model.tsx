@@ -5,13 +5,17 @@ import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { createNoteThunk } from "../../features/notes/thunks";
 
 export const useNewNoteModel = () => {
-  const [note, setNote] = useState<NoteInterface>({} as NoteInterface);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const [note, setNote] = useState<NoteInterface>({} as NoteInterface);
+  const userId = useAppSelector((state) => state.auth.user.id);
+
   const createNewNote = async (event: FormEvent) => {
     event.preventDefault();
-    dispatch(createNoteThunk(note));
+    dispatch(createNoteThunk({ ...note, author_id: userId }));
     const newNote = useAppSelector((state) => state.notes.note);
+
     navigate({
       to: `/${newNote?.id}`,
     });

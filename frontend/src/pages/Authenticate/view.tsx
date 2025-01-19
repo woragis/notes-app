@@ -1,9 +1,14 @@
 import { useAuthenticateModel } from "./model";
 import { Form, FormsContainer } from "./styles";
 
-export const AuthenticateView = ({}: ReturnType<
-  typeof useAuthenticateModel
->) => {
+export const AuthenticateView = ({
+  newUser,
+  user,
+  handleLoginChange,
+  handleRegisterChange,
+  registerUser,
+  loginUser,
+}: ReturnType<typeof useAuthenticateModel>) => {
   return (
     <section className="hero">
       <FormsContainer>
@@ -12,15 +17,45 @@ export const AuthenticateView = ({}: ReturnType<
           <button>Login</button>
           <button>Register</button>
         </header>
-        <Form id="login">
-          <input type="text" name="email" id="email" />
-          <input type="text" name="password" id="password" />
+        <Form id="login" onSubmit={loginUser}>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            onChange={handleLoginChange}
+            value={user.email}
+          />
+          <input
+            type="text"
+            name="password"
+            id="password"
+            onChange={handleLoginChange}
+            value={user.password}
+          />
           <button type="submit">Log in</button>
         </Form>
-        <Form id="register">
-          <input type="text" name="name" id="name" />
-          <input type="text" name="email" id="email" />
-          <input type="text" name="password" id="password" />
+        <Form id="register" onSubmit={registerUser}>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            onChange={handleRegisterChange}
+            value={newUser.name}
+          />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            onChange={handleRegisterChange}
+            value={newUser.email}
+          />
+          <input
+            type="text"
+            name="password"
+            id="password"
+            onChange={handleRegisterChange}
+            value={newUser.password}
+          />
           <span>
             I agree to the <a href="#">Terms & Services</a>
           </span>

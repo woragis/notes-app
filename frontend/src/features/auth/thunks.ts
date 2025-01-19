@@ -1,17 +1,20 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { LoginInterface, RegisterInterface } from "../../types/user.types";
+import {
+  LoginUserInterface,
+  RegisterUserRequest,
+} from "../../types/user.types";
 import { loginService, registerService } from "../../api/services/auth";
 
 export const registerThunk = createAsyncThunk(
   "authentication/register",
-  async (user: RegisterInterface) => {
+  async (user: RegisterUserRequest) => {
     return await registerService(user);
   }
 );
 
 export const loginThunk = createAsyncThunk(
   "authentication/login",
-  async (user: LoginInterface) => {
+  async (user: LoginUserInterface) => {
     return await loginService(user);
   }
 );

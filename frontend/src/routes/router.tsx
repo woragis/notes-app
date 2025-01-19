@@ -10,6 +10,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NewNote from "../pages/NewNote";
 import Authenticate from "../pages/Authenticate";
+import Note from "../pages/Note";
 
 // const router = createRouter({});
 const rootRoute = createRootRoute({
@@ -69,7 +70,7 @@ const noteRoute = createRoute({
   loader: ({ params }) => {
     console.log(params.noteId);
   },
-  component: Home,
+  component: Note,
 });
 
 const routes = [
