@@ -3,20 +3,11 @@ import { NoteInterface } from "../../types/note.types";
 import { NotesSliceState } from "../../types/redux.types";
 import * as thunk from "./thunks";
 
-const getNotes: () => NoteInterface[] = (): NoteInterface[] => {
-  const notes = localStorage.getItem("notes");
-  if (notes) {
-    return JSON.parse(notes) as NoteInterface[];
-  } else {
-    return [] as NoteInterface[];
-  }
-};
-
 const notesSlice = createSlice({
   name: "notes",
   initialState: {
-    notes: getNotes(),
-    note: {},
+    notes: [] as NoteInterface[],
+    note: {} as NoteInterface,
   } as NotesSliceState,
   reducers: {
     getNote: (state, action: PayloadAction<NoteInterface["id"]>) => {
@@ -30,7 +21,7 @@ const notesSlice = createSlice({
       // Fetch notes
       .addCase(thunk.getNotesThunk.fulfilled, (state, action) => {
         state.notes = action.payload.data;
-        localStorage.setItem("notes", JSON.stringify(state.notes));
+        localStorage.setItem("notes", JSON.stringify(action.payload.data));
       })
 
       // Get note and add to redux storage

@@ -8,18 +8,17 @@ export const useHomeModel = () => {
   const dispatch = useAppDispatch();
 
   const notes = useAppSelector((state) => state.notes.notes);
+  const authenticated = useAppSelector((state) => state.auth.authenticated);
 
   useEffect(() => {
     dispatch(getNotesThunk());
   }, []);
 
-  const createNote = () => {
+  const navigateToNewNote = () => {
     navigate({
       to: "/new-note",
     });
   };
 
-  const authenticated = useAppSelector((state) => state.auth.authenticated);
-
-  return { notes, createNote, authenticated };
+  return { notes, authenticated, navigateToNewNote };
 };

@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { NoteInterface } from "../../types/note.types";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { createNoteThunk } from "../../features/notes/thunks";
+import { createNoteThunk, getNotesThunk } from "../../features/notes/thunks";
 import { useNavigate } from "@tanstack/react-router";
 
 export const useNewNoteModel = () => {
@@ -26,14 +26,13 @@ export const useNewNoteModel = () => {
       .unwrap()
       .then((createdNote) => {
         console.log("Display successfull dialog");
+        dispatch(getNotesThunk());
         navigate({
           to: `/notes/${createdNote.data.id}`,
         });
       })
       .catch(() => {
-        console.log(
-          "Send error message with with dialog box and toastify probably"
-        );
+        console.log("Send error message with toastify");
       });
   };
 
