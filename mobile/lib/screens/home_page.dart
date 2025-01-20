@@ -2,54 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'dart:math' as math show Random;
-
-@immutable
-abstract class LoadAction {
-  const LoadAction();
-}
-
-@immutable
-class LoadPersonAction extends LoadAction {
-  final PersonsUrl url;
-
-  const LoadPersonAction({required this.url}) : super();
-}
-
-enum PersonsUrl {
-  person1,
-  person2,
-}
-
-extension UrlString on PersonsUrl {
-  String get urlString {
-    switch (this) {
-      case PersonsUrl.person1:
-        return 'http://localhost:5500/api/person1.json';
-      case PersonsUrl.person2:
-        return 'http://localhost:5500/api/person2.json';
-    }
-  }
-}
-
-@immutable
-class Person {
-  final String name;
-  final int age;
-
-  const Person({
-    required this.name,
-    required this.age,
-  });
-
-  Person.fromJson(Map<String, dynamic> json)
-      : name = json['name'] as String,
-        age = json['age'] as int;
-
-  @override
-  String toString() => 'Person (name: $name, age = $age)';
-}
+import 'package:notes_mobile/bloc/bloc_actions.dart';
+import 'package:notes_mobile/bloc/person.dart';
+import 'package:notes_mobile/bloc/persons_bloc.dart';
 
 Future<Iterable<Person>> getPersons(String url) => HttpClient()
     .getUrl(Uri.parse(url))
@@ -57,45 +14,6 @@ Future<Iterable<Person>> getPersons(String url) => HttpClient()
     .then((resp) => resp.transform(utf8.decoder).join())
     .then((str) => json.decode(str) as List<dynamic>)
     .then((list) => list.map((e) => Person.fromJson(e)));
-
-@immutable
-class FetchResult {
-  final Iterable<Person> persons;
-  final bool isRetrievedFromCache;
-  const FetchResult({
-    required this.persons,
-    required this.isRetrievedFromCache,
-  });
-
-  @override
-  String toString() =>
-      'Fetch Result (isRetrievedFromCache = $isRetrievedFromCache, persons = $persons)';
-}
-
-class PersonsBloc extends Bloc<LoadAction, FetchResult?> {
-  final Map<PersonsUrl, Iterable<Person>> _cache = {};
-  PersonsBloc() : super(null) {
-    on<LoadPersonAction>((event, emit) async {
-      final url = event.url;
-      if (_cache.containsKey(url)) {
-        final cachedPersons = _cache[url];
-        final result = FetchResult(
-          persons: cachedPersons as Iterable<Person>,
-          isRetrievedFromCache: true,
-        );
-        emit(result);
-      } else {
-        final persons = await getPersons(url.urlString);
-        _cache[url] = persons;
-        final result = FetchResult(
-          persons: persons,
-          isRetrievedFromCache: false,
-        );
-        emit(result);
-      }
-    });
-  }
-}
 
 extension Subscript<T> on Iterable<T> {
   T? operator [](int index) => length > index ? elementAt(index) : null;
@@ -109,9 +27,8 @@ class HomePage extends StatelessWidget {
     late final Bloc _;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Pagec'),
-      ),
+      backgroundColor: Colors.blueGrey[50],
+      appBar: _buildAppBar(),
       body: Column(
         children: [
           Row(
@@ -119,8 +36,9 @@ class HomePage extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   context.read<PersonsBloc>().add(
-                        LoadPersonAction(
-                          url: PersonsUrl.person1,
+                        LoadPersonsAction(
+                          url: persons1Url,
+                          loader: getPersons,
                         ),
                       );
                 },
@@ -131,8 +49,9 @@ class HomePage extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   context.read<PersonsBloc>().add(
-                        LoadPersonAction(
-                          url: PersonsUrl.person2,
+                        LoadPersonsAction(
+                          url: persons2Url,
+                          loader: getPersons,
                         ),
                       );
                 },
@@ -162,6 +81,37 @@ class HomePage extends StatelessWidget {
               );
             }),
           )
+        ],
+      ),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.greenAccent.shade200,
+      elevation: 0,
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Icon(
+            Icons.menu,
+            size: 30,
+          ),
+          SizedBox(
+            height: 30,
+            width: 30,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(
+                20,
+              ),
+              child: Image.asset(
+                'assets/images/profile.jpg',
+              ),
+            ),
+          ),
         ],
       ),
     );
