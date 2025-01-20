@@ -21,6 +21,7 @@ const notesSlice = createSlice({
       // Fetch notes
       .addCase(thunk.getNotesThunk.fulfilled, (state, action) => {
         state.notes = action.payload.data;
+        // toastify action.payload.error
         // localStorage.setItem("notes", JSON.stringify(action.payload.data));
       })
 
