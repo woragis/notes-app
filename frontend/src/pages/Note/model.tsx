@@ -5,14 +5,10 @@ import { getNote } from "../../features/notes/slice";
 import { updateNoteThunk } from "../../features/notes/thunks";
 
 export const useNoteModel = () => {
+  const dispatch = useAppDispatch();
   const { noteId } = useParams({
     from: "/notes/$noteId",
   });
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getNote(Number(noteId)));
-  }, [dispatch, noteId]);
 
   const noteInitialState = useAppSelector((state) => state.notes.note);
   const [note, setNote] = useState(noteInitialState);
@@ -24,6 +20,11 @@ export const useNoteModel = () => {
       (note) => (note = { ...note, [event.target.id]: event.target.value })
     );
   };
+
+  useEffect(() => {
+    dispatch(getNote(Number(noteId)));
+  }, [dispatch, noteId]);
+
   useEffect(() => {
     setNote(noteInitialState);
   }, [noteInitialState]);

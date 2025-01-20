@@ -4,13 +4,15 @@ import { useNavigate } from "@tanstack/react-router";
 import { getNotesThunk } from "../../features/notes/thunks";
 
 export const useHomeModel = () => {
-  const notes = useAppSelector((state) => state.notes.notes);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const notes = useAppSelector((state) => state.notes.notes);
+
   useEffect(() => {
     dispatch(getNotesThunk());
   }, []);
 
-  const navigate = useNavigate();
   const createNote = () => {
     navigate({
       to: "/new-note",
