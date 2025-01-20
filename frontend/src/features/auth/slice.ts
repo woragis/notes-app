@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import * as thunk from "./thunks";
 import { User } from "../../types/user.types";
 import Cookies from "js-cookie";
-import { AuthState } from "../../types/redux.types";
+import { AuthSliceState } from "../../types/redux.types";
 
 const getUser: () => User | undefined = (): User | undefined => {
   const user = Cookies.get("user");
@@ -17,7 +17,7 @@ const user = getUser();
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: { user, authenticated: true ? user : false } as AuthState,
+  initialState: { user, authenticated: true ? user : false } as AuthSliceState,
   reducers: {
     logout: (state) => {
       state.authenticated = false;

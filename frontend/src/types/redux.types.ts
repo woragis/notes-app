@@ -6,7 +6,7 @@ export interface NotesSliceState {
   note: NoteInterface | undefined;
 }
 
-export interface AuthState {
+export interface AuthSliceState {
   user: User;
   authenticated: boolean;
 }

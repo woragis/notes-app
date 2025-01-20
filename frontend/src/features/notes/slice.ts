@@ -3,9 +3,18 @@ import { NoteInterface } from "../../types/note.types";
 import { NotesSliceState } from "../../types/redux.types";
 import * as thunk from "./thunks";
 
+const getNotes: () => NoteInterface[] = (): NoteInterface[] => {
+  const notes = localStorage.getItem("notes");
+  if (notes) {
+    return JSON.parse(notes) as NoteInterface[];
+  } else {
+    return [] as NoteInterface[];
+  }
+};
+
 const notesSlice = createSlice({
   name: "notes",
-  initialState: { notes: [], note: undefined } as NotesSliceState,
+  initialState: { notes: getNotes(), note: undefined } as NotesSliceState,
   reducers: {
     getNote: (state, action: PayloadAction<NoteInterface["id"]>) => {
       state.note = state.notes.find((note) => note.id === action.payload);
