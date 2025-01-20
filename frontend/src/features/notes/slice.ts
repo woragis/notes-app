@@ -14,10 +14,14 @@ const getNotes: () => NoteInterface[] = (): NoteInterface[] => {
 
 const notesSlice = createSlice({
   name: "notes",
-  initialState: { notes: getNotes(), note: undefined } as NotesSliceState,
+  initialState: {
+    notes: getNotes(),
+    note: {},
+  } as NotesSliceState,
   reducers: {
     getNote: (state, action: PayloadAction<NoteInterface["id"]>) => {
-      state.note = state.notes.find((note) => note.id === action.payload);
+      let note = state.notes.find((note) => note.id === action.payload);
+      if (note) state.note = note;
     },
   },
   extraReducers: (builder) => {

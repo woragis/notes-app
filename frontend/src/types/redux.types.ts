@@ -3,7 +3,7 @@ import { User } from "./user.types";
 
 export interface NotesSliceState {
   notes: NoteInterface[];
-  note: NoteInterface | undefined;
+  note: NoteInterface;
 }
 
 export interface AuthSliceState {

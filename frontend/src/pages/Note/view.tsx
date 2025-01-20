@@ -1,20 +1,34 @@
 import { useNoteModel } from "./model";
+import { NoteTitleContainer, NoteContentContainer } from "./styles";
 
-export const NoteView = ({ note }: ReturnType<typeof useNoteModel>) => {
-  if (note)
-    return (
-      <div>
-        <h1>Note: {note.id}</h1>
-
+export const NoteView = ({
+  note,
+  handleChange,
+}: ReturnType<typeof useNoteModel>) => {
+  return (
+    <div>
+      <br />
+      <hr />
+      <h3>{note.id}</h3>
+      <form action="">
+        <NoteTitleContainer
+          type="text"
+          id="title"
+          name="title"
+          onChange={handleChange}
+          value={note.title || ""}
+        />
         <br />
         <hr />
-        <h3>{note.title}</h3>
         <br />
-        <p>{note.content}</p>
-        <p>author: {note.author_id}</p>
-      </div>
-    );
-  else {
-    return <h1>No note selected</h1>;
-  }
+        <NoteContentContainer
+          id="content"
+          name="content"
+          onChange={handleChange}
+          value={note.content || ""}
+        />
+      </form>
+      <p>author: {note.author_id}</p>
+    </div>
+  );
 };
