@@ -11,9 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { NotesResponse } from "../../types/response.types";
 
 export const getNotesThunk = createAsyncThunk("notes/fetch", async () => {
-  // const cachedData = localStorage.getItem("notes");
-  // if (cachedData) return JSON.parse(cachedData);
-  // console.log("trying to fetch with redux thunk");
   const { data, isLoading } = useQuery<NotesResponse>({
     queryKey: ["notes"],
     queryFn: getNotesService,
