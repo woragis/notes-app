@@ -7,11 +7,17 @@ export const useNoteModel = (note: NoteInterface) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const deleteCurrentNote = () => {
-    dispatch(deleteNoteThunk(note.id));
-    navigate({
-      to: "/",
-    });
+  const deleteNote = () => {
+    dispatch(deleteNoteThunk(note.id))
+      .then(() => {
+        navigate({
+          to: "/",
+        });
+      })
+      .catch(() => {
+        console.log("display with toastify");
+      });
   };
-  return { note, deleteNote: deleteCurrentNote };
+
+  return { note, deleteNote };
 };

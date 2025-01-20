@@ -1,12 +1,8 @@
 import { FaInstagram, FaLinkedin } from "react-icons/fa6";
 import { SiGithub, SiLeetcode } from "react-icons/si";
+import { FooterSocialMedia } from "../../types/footer.types";
 
 export const useFooterModel = () => {
-  interface FooterSocialMedia {
-    icon: JSX.Element;
-    key: string;
-    path: string;
-  }
   const socialMediaLinks: FooterSocialMedia[] = [
     { key: "github", path: "https://github.com/woragis", icon: <SiGithub /> },
     {
@@ -16,14 +12,15 @@ export const useFooterModel = () => {
     },
     {
       key: "instagram",
-      path: "http://instagram.com/y.jezreel.andrade",
+      path: "https://instagram.com/y.jezreel.andrade",
       icon: <FaInstagram />,
     },
     {
       key: "linkedin",
-      path: "http://linkedin.com/in/jezreel-andrade",
+      path: "https://linkedin.com/in/jezreel-andrade",
       icon: <FaLinkedin />,
     },
   ];
+
   return { socialMediaLinks };
 };
