@@ -5,7 +5,8 @@ import {
   createNoteService,
   updateNoteService,
 } from "../../api/services/notes";
-import { NotesResponse, NoteResponse } from "../../types/response.types";
+import { NotesResponse } from "../../types/response.types";
+import { NoteInterface } from "../../types/note.types";
 
 export const getNotesThunk = createAsyncThunk(
   "notes/fetch",
@@ -16,28 +17,28 @@ export const getNotesThunk = createAsyncThunk(
 
 export const getNoteByIdThunk = createAsyncThunk(
   "notes/getNote",
-  async (noteId: NoteResponse["data"]["id"]) => {
+  async (noteId: NoteInterface["id"]) => {
     return await getNoteByIdService(noteId);
   }
 );
 
 export const createNoteThunk = createAsyncThunk(
   "notes/create",
-  async (note: NoteResponse) => {
-    return await createNoteService(note.data);
+  async (note: NoteInterface) => {
+    return await createNoteService(note);
   }
 );
 
 export const updateNoteThunk = createAsyncThunk(
   "notes/update",
-  async (note: NoteResponse) => {
-    return await updateNoteService(note.data);
+  async (note: NoteInterface) => {
+    return await updateNoteService(note);
   }
 );
 
 export const deleteNoteThunk = createAsyncThunk(
   "notes/delete",
-  async (noteId: NoteResponse["data"]["id"]) => {
+  async (noteId: NoteInterface["id"]) => {
     const response = await deleteNoteService(noteId);
     return { noteId, response };
   }

@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import NewNote from "../pages/NewNote";
 import Authenticate from "../pages/Authenticate";
 import Note from "../pages/Note";
+import NewNoteButton from "../components/NewNoteButton";
 
 // const router = createRouter({});
 const rootRoute = createRootRoute({
@@ -23,6 +24,7 @@ const rootRoute = createRootRoute({
         <Navbar />
         <main>
           <Outlet />
+          <NewNoteButton />
         </main>
         <Footer />
       </>

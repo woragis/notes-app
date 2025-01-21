@@ -1,8 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { NoteInterface } from "../../types/note.types";
 import { useAppDispatch, useAppSelector } from "../../features/hooks";
-import { createNoteThunk, getNotesThunk } from "../../features/notes/thunks";
+import { createNoteThunk } from "../../features/notes/thunks";
 import { useNavigate } from "@tanstack/react-router";
+import { toast } from "react-toastify";
 
 export const useNewNoteModel = () => {
   const dispatch = useAppDispatch();
@@ -25,14 +26,12 @@ export const useNewNoteModel = () => {
     dispatch(createNoteThunk({ ...note, author_id: userId }))
       .unwrap()
       .then((createdNote) => {
-        console.log("Display successfull dialog");
-        dispatch(getNotesThunk());
         navigate({
           to: `/notes/${createdNote.data.id}`,
         });
       })
-      .catch(() => {
-        console.log("Send error message with toastify");
+      .catch((e) => {
+        toast.error(`Error: ${e}`);
       });
   };
 

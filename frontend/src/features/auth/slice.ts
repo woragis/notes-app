@@ -3,6 +3,7 @@ import * as thunk from "./thunks";
 import { User } from "../../types/user.types";
 import Cookies from "js-cookie";
 import { AuthSliceState } from "../../types/redux.types";
+import { toast } from "react-toastify";
 
 const getUser: () => User | undefined = (): User | undefined => {
   const user = Cookies.get("user");
@@ -23,6 +24,7 @@ const authSlice = createSlice({
       state.authenticated = false;
       state.user = {} as User;
       Cookies.remove("user");
+      toast.success("Successfully logged out");
     },
   },
   extraReducers: (builder) => {
@@ -34,6 +36,7 @@ const authSlice = createSlice({
           expires: 7,
           path: "/",
         });
+        toast.success("Successfully logged in");
       })
       .addCase(thunk.loginThunk.fulfilled, (state, action) => {
         state.authenticated = true;
@@ -42,6 +45,7 @@ const authSlice = createSlice({
           expires: 7,
           path: "/",
         });
+        toast.success("Successfully logged in");
       });
   },
 });

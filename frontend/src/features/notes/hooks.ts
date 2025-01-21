@@ -32,7 +32,7 @@ export const useCreateNote = (note: NoteInterface) => {
     mutationFn: async () => await updateNoteService(note),
   });
 
-  if (response.data) dispatch(createNoteThunk(response.data));
+  if (response.data) dispatch(createNoteThunk(response.data.data));
 };
 
 export const useUpdateNote = (note: NoteInterface) => {
@@ -43,7 +43,7 @@ export const useUpdateNote = (note: NoteInterface) => {
     mutationFn: async () => await updateNoteService(note),
   });
 
-  if (response.data) dispatch(updateNoteThunk(response.data));
+  if (response.data) dispatch(updateNoteThunk(response.data.data));
 };
 
 export const useDeleteNote = (noteId: NoteInterface["id"]) => {

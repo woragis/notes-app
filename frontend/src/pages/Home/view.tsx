@@ -4,7 +4,6 @@ import { HomeDivider, HomeTitle, NotesContainer } from "./styles";
 
 export const HomeView = ({
   notes,
-  navigateToNewNote,
   authenticated,
 }: ReturnType<typeof useHomeModel>) => {
   const notesComponent = notes.map((note, index) => {
@@ -27,7 +26,6 @@ export const HomeView = ({
       <HomeDivider />
       {!authenticated && <h1>Login or register to see your notes</h1>}
       {authenticated && <NotesContainer>{notesComponent}</NotesContainer>}
-      <button onClick={navigateToNewNote}>New Note</button>
     </div>
   );
 };
