@@ -1,27 +1,45 @@
+import { toast } from "react-toastify";
+import { AuthLink, AuthWarning } from "../../components/ui/AuthWarning";
 import { useNewNoteModel } from "./model";
-import { NewNoteContent, NewNoteTitle } from "./styles";
+import {
+  NoteContent,
+  NoteTitle,
+  NoteContainer,
+} from "../../components/ui/Note";
 
 export const NewNoteView = ({
+  authenticated,
   createNewNote,
   handleChange,
-  authenticated,
 }: ReturnType<typeof useNewNoteModel>) => {
   if (!authenticated) {
-    return <h1>Not authenticated yet</h1>;
+    toast.warn("You need to login");
+    return (
+      <AuthWarning>
+        <AuthLink to="/auth">Login</AuthLink> or{" "}
+        <AuthLink to="/auth">Register</AuthLink> before creating a new note
+      </AuthWarning>
+    );
   } else {
     return (
-      <div>
+      <NoteContainer>
         <form onSubmit={createNewNote}>
-          <NewNoteTitle
+          <NoteTitle
             type="text"
             id="title"
             name="title"
+            placeholder="title"
             onChange={handleChange}
           />
-          <NewNoteContent id="content" name="content" onChange={handleChange} />
+          <NoteContent
+            id="content"
+            name="content"
+            placeholder="..."
+            onChange={handleChange}
+          />
           <button>Create Note</button>
         </form>
-      </div>
+      </NoteContainer>
     );
   }
 };

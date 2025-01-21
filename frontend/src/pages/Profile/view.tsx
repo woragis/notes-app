@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+import { AuthLink, AuthWarning } from "../../components/ui/AuthWarning";
 import { useProfileModel } from "./model";
 
 export const ProfileView = ({
@@ -5,8 +7,23 @@ export const ProfileView = ({
   user,
 }: ReturnType<typeof useProfileModel>) => {
   if (!authenticated) {
-    return <h1>Not authenticated</h1>;
+    toast.warn("You need to login");
+    return (
+      <AuthWarning>
+        <AuthLink to="/auth">Login</AuthLink> or{" "}
+        <AuthLink to="/auth">Register</AuthLink> to see your profile
+      </AuthWarning>
+    );
   } else {
-    return <div>{user.name}</div>;
+    return (
+      <div>
+        <small>user id: {user.id}</small>
+        <h1>{user.name}</h1>
+        <p>Email: {user.email}</p>
+        <p>Password: {user.password}</p>
+        <p>Created At: {user.createdAt}</p>
+        <p>Updated At: {user.updatedAt}</p>
+      </div>
+    );
   }
 };

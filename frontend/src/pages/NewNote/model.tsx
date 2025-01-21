@@ -10,7 +10,7 @@ export const useNewNoteModel = () => {
   const navigate = useNavigate();
 
   const [note, setNote] = useState<NoteInterface>({} as NoteInterface);
-  const userId = useAppSelector((state) => state.auth.user.id);
+  const userId = useAppSelector((state) => state.auth.user?.id);
   const authenticated = useAppSelector((state) => state.auth.authenticated);
 
   const handleChange = (

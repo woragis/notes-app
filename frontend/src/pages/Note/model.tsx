@@ -10,6 +10,7 @@ export const useNoteModel = () => {
     from: "/notes/$noteId",
   });
 
+  const authenticated = useAppSelector((state) => state.auth.authenticated);
   const noteInitialState = useAppSelector((state) => state.notes.note);
   const [note, setNote] = useState(noteInitialState);
 
@@ -41,5 +42,5 @@ export const useNoteModel = () => {
     };
   }, [note]);
 
-  return { note, handleChange };
+  return { authenticated, note, handleChange };
 };

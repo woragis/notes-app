@@ -9,6 +9,6 @@ export interface RegisterUserRequest extends LoginUserInterface {
 
 export interface User extends RegisterUserRequest {
   id: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }

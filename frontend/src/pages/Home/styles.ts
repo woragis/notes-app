@@ -1,10 +1,15 @@
 import styled from "@emotion/styled";
 
+export const HomeContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  position: relative;
+`;
+
 export const NotesContainer = styled.section`
-  width: 100vw;
+  width: 100%;
+  padding: 20px 50px;
   height: max-content;
-  padding: 50px;
-  width: calc(100vw - 50px);
   columns: 15rem;
   overflow-x: hidden;
   overflow-y: scroll;

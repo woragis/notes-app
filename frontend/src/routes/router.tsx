@@ -53,25 +53,12 @@ const newNoteRoute = createRoute({
 const profileRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/profile",
-  //   beforeLoad: () => {
-  //     if (true) {
-  //         throw redirect({
-  //             to: '/',
-  //             search: {
-  //                 redirect: location.href
-  //             }
-  //         });
-  //     }
-  //   },
   component: Profile,
 });
 
 const noteRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "notes/$noteId",
-  loader: ({ params }) => {
-    console.log(params.noteId);
-  },
   component: Note,
 });
 

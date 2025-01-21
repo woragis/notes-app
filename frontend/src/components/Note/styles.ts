@@ -32,7 +32,7 @@ export const NoteContentContainer = styled.div`
   width: 100%;
   font-size: 0.9rem;
   color: #ccc;
-  overflow-y: hidden;
+  overflow: hidden;
   max-height: 200px;
 `;
 
@@ -40,16 +40,18 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  gap: 20px;
+`;
 
-  button {
-    font-size: 14px;
-    padding: 10px 10px 8px;
-    transition: 300ms;
-    border: none;
+export const DeleteButton = styled.button`
+  font-size: 14px;
+  padding: 10px 10px 8px;
+  transition: 300ms;
+  border: none;
+  flex-basis: auto;
 
-    &:hover {
-      background-color: red;
-    }
+  &:hover {
+    background-color: red;
   }
 `;
 

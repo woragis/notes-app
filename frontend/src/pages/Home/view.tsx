@@ -1,10 +1,17 @@
+import { toast } from "react-toastify";
 import Note from "../../components/Note";
 import { useHomeModel } from "./model";
-import { HomeDivider, HomeTitle, NotesContainer } from "./styles";
+import {
+  HomeContainer,
+  HomeDivider,
+  HomeTitle,
+  NotesContainer,
+} from "./styles";
+import { AuthLink, AuthWarning } from "../../components/ui/AuthWarning";
 
 export const HomeView = ({
-  notes,
   authenticated,
+  notes,
 }: ReturnType<typeof useHomeModel>) => {
   const notesComponent = notes.map((note, index) => {
     return (
@@ -20,12 +27,21 @@ export const HomeView = ({
     );
   });
 
-  return (
-    <div>
-      <HomeTitle>Notas</HomeTitle>
-      <HomeDivider />
-      {!authenticated && <h1>Login or register to see your notes</h1>}
-      {authenticated && <NotesContainer>{notesComponent}</NotesContainer>}
-    </div>
-  );
+  if (!authenticated) {
+    toast.warn("You need to login");
+    return (
+      <AuthWarning>
+        <AuthLink to="/auth">Login</AuthLink> or{" "}
+        <AuthLink to="/auth">Register</AuthLink> to see your notes
+      </AuthWarning>
+    );
+  } else {
+    return (
+      <HomeContainer>
+        <HomeTitle>Notas</HomeTitle>
+        <HomeDivider />
+        <NotesContainer>{notesComponent}</NotesContainer>
+      </HomeContainer>
+    );
+  }
 };

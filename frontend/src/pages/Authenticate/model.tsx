@@ -3,13 +3,15 @@ import {
   LoginUserInterface,
   RegisterUserRequest,
 } from "../../types/user.types";
-import { useAppDispatch } from "../../features/hooks";
+import { useAppDispatch, useAppSelector } from "../../features/hooks";
 import { loginThunk, registerThunk } from "../../features/auth/thunks";
 import { useNavigate } from "@tanstack/react-router";
 
 export const useAuthenticateModel = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const authenticated = useAppSelector((state) => state.auth.authenticated);
 
   const [newUser, setNewUser] = useState<RegisterUserRequest>(
     {} as RegisterUserRequest
@@ -60,6 +62,7 @@ export const useAuthenticateModel = () => {
   };
 
   return {
+    authenticated,
     newUser,
     user,
     handleRegisterChange,
