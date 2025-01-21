@@ -20,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
           draggableDirection="x"
           newestOnTop
           stacked
+          position="top-left"
         />
         <Global styles={global} />
         <RouterProvider router={router} />

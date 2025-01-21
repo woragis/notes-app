@@ -8,8 +8,9 @@ export const StyledNavbar = styled.nav`
   position: fixed;
   width: 100%;
   transition: 500ms;
+
   &.sticky {
-    background-color: white;
+    background-color: black;
     padding: 0.5125rem 3.125rem;
   }
 `;
@@ -26,4 +27,9 @@ export const NavLink = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 160px;
+  /* margin: 0 20px; */
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
 `;
