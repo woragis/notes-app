@@ -4,23 +4,16 @@ import {
   getNoteByIdService,
   createNoteService,
   updateNoteService,
-  useNotes,
 } from "../../api/services/notes";
 import { NoteInterface } from "../../types/note.types";
 import { NotesResponse } from "../../types/response.types";
 
-export const getNotesThunk = createAsyncThunk("notes/fetch", async () => {
-  try {
-    console.log("get notes thunk got called");
-    const data = useNotes();
-    // toastify(error)
-    if (data) return data;
-  } catch (e) {
-    console.log(e);
-  } finally {
-    return {} as NotesResponse;
+export const getNotesThunk = createAsyncThunk(
+  "notes/fetch",
+  async (data: NotesResponse) => {
+    return data;
   }
-});
+);
 
 export const getNoteByIdThunk = createAsyncThunk(
   "notes/getNote",

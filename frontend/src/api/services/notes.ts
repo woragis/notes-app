@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import { NoteInterface } from "../../types/note.types";
 import {
   DeleteResponse,
@@ -35,19 +34,4 @@ export const deleteNoteService = async (noteId: number) => {
     `notes/${noteId}`
   );
   return response.data;
-};
-
-export const useNotes = () => {
-  const response = useQuery({
-    queryKey: ["notes"],
-    queryFn: async () => {
-      console.log("fetching notes with tanstack");
-      const response = await getNotesService();
-      console.log("fetched response:");
-      console.log(response);
-      return response;
-    },
-  });
-  if (response) return response.data;
-  else return {} as NotesResponse;
 };
