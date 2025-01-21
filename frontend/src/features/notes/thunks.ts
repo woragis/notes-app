@@ -31,8 +31,7 @@ export const createNoteThunk = createAsyncThunk(
 export const updateNoteThunk = createAsyncThunk(
   "notes/update",
   async (note: NoteResponse) => {
-    const response = await updateNoteService(note.data);
-    return { response };
+    return await updateNoteService(note.data);
   }
 );
 
