@@ -1,8 +1,10 @@
+import { FaTrashCan } from "react-icons/fa6";
 import { useNoteModel } from "./model";
 import {
   ContentWrapper,
   NoteContentContainer,
   NoteTitleContainer,
+  StyledHeader,
   StyledNote,
 } from "./styles";
 
@@ -12,11 +14,13 @@ export const NoteView = ({
 }: ReturnType<typeof useNoteModel>) => {
   return (
     <StyledNote>
-      <header>
-        <button onClick={deleteNote}>Delete note</button>
-      </header>
       <ContentWrapper to={`notes/${note.id}`}>
-        <NoteTitleContainer>{note.title}</NoteTitleContainer>
+        <StyledHeader>
+          <NoteTitleContainer>{note.title}</NoteTitleContainer>
+          <button onClick={deleteNote}>
+            <FaTrashCan />
+          </button>
+        </StyledHeader>
         <NoteContentContainer>{note.content}</NoteContentContainer>
       </ContentWrapper>
     </StyledNote>

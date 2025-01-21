@@ -20,7 +20,10 @@ export const NoteTitleContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  flex-wrap: wrap;
+  width: 210px;
+  max-height: 80px;
+  overflow: hidden;
   margin-bottom: 20px;
   font-size: 1.5rem;
 `;
@@ -31,6 +34,23 @@ export const NoteContentContainer = styled.div`
   color: #ccc;
   overflow-y: hidden;
   max-height: 200px;
+`;
+
+export const StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  button {
+    font-size: 14px;
+    padding: 10px 10px 8px;
+    transition: 300ms;
+    border: none;
+
+    &:hover {
+      background-color: red;
+    }
+  }
 `;
 
 // use on notes model upgrade
