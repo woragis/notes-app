@@ -1,5 +1,6 @@
 export interface NavPagesinterface {
   name: string;
   path: string;
-  element: () => any;
+  element?: JSX.Element;
+  onClick?: () => void;
 }

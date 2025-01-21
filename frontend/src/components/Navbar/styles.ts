@@ -8,6 +8,7 @@ export const StyledNavbar = styled.nav`
   position: fixed;
   width: 100%;
   transition: 500ms;
+  z-index: 10;
 
   &.sticky {
     background-color: black;

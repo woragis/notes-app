@@ -2,10 +2,10 @@ import { useNavbarModel } from "./model";
 import { LinksContainer, NavLink, StyledNavbar } from "./styles";
 
 export const NavbarView = ({ navPages }: ReturnType<typeof useNavbarModel>) => {
-  const navLinksComponent = navPages.map(({ name, path }) => {
+  const navLinksComponent = navPages.map(({ name, path, element, onClick }) => {
     return (
-      <NavLink key={`navbar_item_${name}`} to={path}>
-        {name}
+      <NavLink key={`navbar_item_${name}`} to={path} onClick={onClick}>
+        {element ? element : name}
       </NavLink>
     );
   });
