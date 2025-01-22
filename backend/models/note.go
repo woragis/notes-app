@@ -1,9 +1,13 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type Note struct {
-	ID        int       `json:"id"`
+	ID        uuid.UUID `json:"id"`
 	Title     string    `json:"title"`
 	Content   string    `json:"content"`
 	AuthorID  int       `json:"author_id"`
