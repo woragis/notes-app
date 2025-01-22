@@ -1,11 +1,11 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const baseURL = "http://localhost:8080/";
 const timeout = 5000;
-const token = "";
+const token = Cookies.get("token");
 const headers = {
-  // "application/type": "application/json",
-  Authorization: `Bearer ${token}`,
+  Authorization: `Bearer ${token ? token : ""}`,
 };
 
 export const axiosInstance = axios.create({

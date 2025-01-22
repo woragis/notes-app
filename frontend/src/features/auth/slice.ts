@@ -4,6 +4,7 @@ import { User } from "../../types/user.types";
 import Cookies from "js-cookie";
 import { AuthSliceState } from "../../types/redux.types";
 import { toast } from "react-toastify";
+import { setCookie } from "../../utils/cookies";
 
 const getUser: () => User | undefined = (): User | undefined => {
   const user = Cookies.get("user");
@@ -24,6 +25,7 @@ const authSlice = createSlice({
       state.authenticated = false;
       state.user = {} as User;
       Cookies.remove("user");
+      Cookies.remove("token");
       toast.success("Successfully logged out");
     },
   },
@@ -32,19 +34,15 @@ const authSlice = createSlice({
       .addCase(thunk.registerThunk.fulfilled, (state, action) => {
         state.authenticated = true;
         state.user = action.payload.data.user;
-        Cookies.set("user", JSON.stringify(action.payload.data.user), {
-          expires: 7,
-          path: "/",
-        });
+        setCookie("user", JSON.stringify(action.payload.data.user), 7, "lax");
+        setCookie("token", JSON.stringify(action.payload.data.token), 7, "lax");
         toast.success("Successfully logged in");
       })
       .addCase(thunk.loginThunk.fulfilled, (state, action) => {
         state.authenticated = true;
         state.user = action.payload.data.user;
-        Cookies.set("user", JSON.stringify(action.payload.data.user), {
-          expires: 7,
-          path: "/",
-        });
+        setCookie("user", JSON.stringify(action.payload.data.user), 7, "lax");
+        setCookie("token", JSON.stringify(action.payload.data.token), 7, "lax");
         toast.success("Successfully logged in");
       });
   },
