@@ -11,7 +11,7 @@ export const getNotesService = async () => {
   return response.data;
 };
 
-export const getNoteByIdService = async (noteId: number) => {
+export const getNoteByIdService = async (noteId: NoteInterface["id"]) => {
   const response = await axiosInstance.get<NoteResponse>(`notes/${noteId}`);
   return response.data;
 };
@@ -29,7 +29,7 @@ export const updateNoteService = async (note: NoteInterface) => {
   return response.data;
 };
 
-export const deleteNoteService = async (noteId: number) => {
+export const deleteNoteService = async (noteId: NoteInterface["id"]) => {
   const response = await axiosInstance.delete<DeleteResponse>(
     `notes/${noteId}`
   );

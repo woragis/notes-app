@@ -23,7 +23,7 @@ export const useNoteModel = () => {
   };
 
   useEffect(() => {
-    dispatch(getNote(Number(noteId)));
+    dispatch(getNote(noteId));
   }, [dispatch, noteId]);
 
   useEffect(() => {
