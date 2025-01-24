@@ -142,6 +142,8 @@ func Register(c *gin.Context) {
 		return
 	}
 
+	user.Password = string(hashedPassword)
+
 	utils.SendResponse(
 		c,
 		http.StatusCreated,
