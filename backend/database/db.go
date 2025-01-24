@@ -29,9 +29,11 @@ func InitializeTables() {
 		log.Fatal("Database connection is not initialized")
 	}
 
-	createUsersTable := `
+	createUuidExtension := `
 	CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+	`
 
+	createUsersTable := `
 	CREATE TABLE IF NOT EXISTS users (
 		id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 		name VARCHAR(100) NOT NULL,
@@ -42,8 +44,6 @@ func InitializeTables() {
 	);`
 
 	createNotesTable := `
-	CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 	CREATE TABLE IF NOT EXISTS notes (
 		id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
 		title VARCHAR(100) NOT NULL,
@@ -53,7 +53,7 @@ func InitializeTables() {
 		updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);`
 
-	queries := []string{createUsersTable, createNotesTable}
+	queries := []string{createUuidExtension, createUsersTable, createNotesTable}
 
 	for _, query := range queries {
 		_, err := DB.Exec(context.Background(), query)
